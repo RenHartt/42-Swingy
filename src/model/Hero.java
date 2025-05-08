@@ -46,8 +46,7 @@ public class Stats {
     public int getHitPoints() { return this.hitPoints; }
 }
 
-public abstract class Hero {
-    protected String name;
+public abstract class Hero extends Entity {
     protected Stats stats;
     protected Stuff stuff;
 
@@ -55,32 +54,31 @@ public abstract class Hero {
     protected int experience;
 
     public Hero(String name) {
-        this.name = name;
+        super(name);
     }
 
-    public int getTotalAttack() { return this.stats.getAttack() + (this.weapon != null ? this.weapon.getBonus() : 0); }
-    public int getTotalDefense() { return this.stats.getDefense() + (this.armor != null ? this.armor.getBonus() : 0); }
-    public int getTotalHitPoints() { return this.stats.getHitPoints() + (this.helm != null ? this.helm.getBonus() : 0); }
+    public int getTotalAttack() { return this.stats.getAttack() + (this.stuff.getWeapon() != null ? this.stuff.getWeapon().getBonus() : 0); }
+    public int getTotalDefense() { return this.stats.getDefense() + (this.stuff.getArmor() != null ? this.stuff.getArmor().getBonus() : 0); }
+    public int getTotalHitPoints() { return this.stats.getHitPoints() + (this.stuff.getHelm() != null ? this.stuff.getHelm().getBonus() : 0); }
+    public int getLevel() { return this.level; }
+    public int getExperience() { return this.experience; }
+
+    public void setLevel(int level) { this.level = level; }
+    public void setExperience(int experience) { this.experience = experience; }
 }
 
 public class Warrior extends Hero {
-    public Warrior(String name) {
-        super(name);
+    public Warrior() {
+        super("Warrior");
         this.stats = new Stats(15, 10, 150);
-        this.stuff = new Stuff(
-            new Weapon("Sword", 10), 
-            new Armor("Plate Armor", 5), 
-            new Helm("Iron Helm", 20));
+        this.stuff = new Stuff(new Weapon(10), new Armor(5), new Helm(20));
     }
 }
 
 public class Wizard extends Hero {
-    public Wizard(String name) {
-        super(name);
+    public Wizard() {
+        super("Wizard");
         this.stats = new Stats(20, 5, 100);
-        this.stuff = new Stuff(
-            new Weapon("Wizard's staff", 15), 
-            new Armor("Robe", 5), 
-            new Helm("Pointed hat", 5));
+        this.stuff = new Stuff(new Weapon(15), new Armor(5), new Helm(5));
     }
 }

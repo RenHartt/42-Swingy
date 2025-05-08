@@ -1,9 +1,8 @@
-public class Villain {
-    private String name;
+public class Villain extends Entity {
     private Stats stats;
 
-    public Villain(String name, Stats stats) {
-        this.name = name;
+    public Villain(Stats stats) {
+        super("Villain");
         this.stats = stats;
     }
 }

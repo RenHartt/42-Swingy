@@ -1,14 +1,10 @@
-public abstract class Artifact {
+public abstract class Artifact extends Entity {
     protected String name;
     protected int bonus;
 
     public Artifact(String name, int bonus) {
-        this.name = name;
+        super(name);
         this.bonus = bonus;
-    }
-
-    public String getName() {
-        return this.name;
     }
 
     public int getBonus() {
@@ -17,19 +13,19 @@ public abstract class Artifact {
 }
 
 public class Weapon extends Artifact {
-    public Weapon(String name, int bonus) {
-        super(name, bonus);
+    public Weapon(int bonus) {
+        super("Weapon", bonus);
     }
 }
 
 public class Armor extends Artifact {
-    public Armor(String name, int bonus) {
-        super(name, bonus);
+    public Armor(int bonus) {
+        super("Armor", bonus);
     }
 }
 
 public class Helm extends Artifact {
-    public Helm(String name, int bonus) {
-        super(name, bonus);
+    public Helm(int bonus) {
+        super("Helm", bonus);
     }
 }
