@@ -1,44 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <!-- Informations sur le projet -->
-    <groupId>com.example</groupId>  <!-- Identifiant unique du groupe -->
-    <artifactId>Swingy</artifactId> <!-- Nom de ton projet -->
-    <version>1.0-SNAPSHOT</version>  <!-- Version de ton projet -->
-    <packaging>jar</packaging>       <!-- Type de fichier généré (JAR) -->
+  <groupId>com.example</groupId>
+  <artifactId>Swingy</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-    <!-- Dépendances du projet -->
-    <dependencies>
-        <!-- Dépendance pour JLine (gestion des entrées clavier en temps réel) -->
-        <dependency>
-            <groupId>org.jline</groupId>
-            <artifactId>jline-terminal</artifactId>
-            <version>3.20.0</version>
-        </dependency>
-    </dependencies>
+  <dependencies>
+    <dependency>
+      <groupId>org.jline</groupId>
+      <artifactId>jline</artifactId>
+      <version>3.19.0</version>
+    </dependency>
+  </dependencies>
 
-    <!-- Configuration pour exécuter l'application Java -->
-    <build>
-        <plugins>
-            <!-- Plugin pour exécuter la classe principale -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-exec-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>  <!-- Indique que l'on veut exécuter une application Java -->
-                        </goals>
-                        <configuration>
-                            <mainClass>Main</mainClass> <!-- Remplace par le nom de ta classe principale -->
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <!-- Chemin complet de la classe principale -->
+          <mainClass>main.Main</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

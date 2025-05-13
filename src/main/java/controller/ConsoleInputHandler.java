@@ -1,7 +1,7 @@
 package controller;
 
-import org.jline.reader.*;
-import org.jline.utils.*;
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
 
 public class ConsoleInputHandler implements InputHandler {
     private LineReader reader;
