@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Informations sur le projet -->
+    <groupId>com.example</groupId>  <!-- Identifiant unique du groupe -->
+    <artifactId>Swingy</artifactId> <!-- Nom de ton projet -->
+    <version>1.0-SNAPSHOT</version>  <!-- Version de ton projet -->
+    <packaging>jar</packaging>       <!-- Type de fichier généré (JAR) -->
+
+    <!-- Dépendances du projet -->
+    <dependencies>
+        <!-- Dépendance pour JLine (gestion des entrées clavier en temps réel) -->
+        <dependency>
+            <groupId>org.jline</groupId>
+            <artifactId>jline-terminal</artifactId>
+            <version>3.20.0</version>
+        </dependency>
+    </dependencies>
+
+    <!-- Configuration pour exécuter l'application Java -->
+    <build>
+        <plugins>
+            <!-- Plugin pour exécuter la classe principale -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-exec-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>  <!-- Indique que l'on veut exécuter une application Java -->
+                        </goals>
+                        <configuration>
+                            <mainClass>Main</mainClass> <!-- Remplace par le nom de ta classe principale -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

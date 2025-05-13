@@ -1,3 +1,5 @@
+package model;
+
 public abstract class Entity {
     String name;
     public Entity(String name) {
