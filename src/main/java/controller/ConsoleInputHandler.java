@@ -1,22 +1,32 @@
 package controller;
 
-import org.jline.reader.LineReader;
-import org.jline.reader.LineReaderBuilder;
+import java.io.IOException;
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
+import org.jline.utils.NonBlockingReader;
 
 public class ConsoleInputHandler implements InputHandler {
-    private LineReader reader;
+    private final NonBlockingReader reader;
 
-    public ConsoleInputHandler() {
-        this.reader = LineReaderBuilder.builder().build();
+    public ConsoleInputHandler() throws IOException {
+        Terminal terminal = TerminalBuilder.builder()
+                                           .system(true)
+                                           .jna(false)
+                                           .jansi(true)
+                                           .build();
+        terminal.enterRawMode();
+        this.reader = terminal.reader();
     }
 
     @Override
     public String getInput() {
         try {
-            return reader.readLine(">> ");
-        } catch (Exception e) {
+            int code = reader.read();
+            if (code < 0) return null;
+            return Character.toString((char) code);
+        } catch (IOException e) {
             e.printStackTrace();
-            return "";
+            return null;
         }
     }
 }
