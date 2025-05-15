@@ -12,6 +12,9 @@ public abstract class Hero extends Entity {
     }
 
     public Stats getStats() { return this.stats; }
+    public int getAttack() { return this.stats.getAttack(); }
+    public int getDefense() { return this.stats.getDefense(); }
+    public int getHitPoints() { return this.stats.getHitPoints(); }
     public int getTotalAttack() { return this.stats.getAttack() + (this.stuff.getWeapon() != null ? this.stuff.getWeapon().getBonus() : 0); }
     public int getTotalDefense() { return this.stats.getDefense() + (this.stuff.getArmor() != null ? this.stuff.getArmor().getBonus() : 0); }
     public int getTotalHitPoints() { return this.stats.getHitPoints() + (this.stuff.getHelm() != null ? this.stuff.getHelm().getBonus() : 0); }

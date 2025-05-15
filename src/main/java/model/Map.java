@@ -2,17 +2,6 @@ package model;
 
 import java.util.Random;
 
-class Cell {
-    private Entity entity;
-
-    public Cell(Entity entity) {
-        this.entity = entity;
-    }
-
-    public Entity getEntity() { return entity; }
-    public void setEntity(Entity entity) { this.entity = entity; }
-}
-
 public class Map {
     private int size;
     private Cell[][] cells;
@@ -100,19 +89,19 @@ public class Map {
 
     }
 
-    public void printMap() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+    // public void printMap() {
+    //     System.out.print("\033[H\033[2J");
+    //     System.out.flush();
 
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (cells[i][j].getEntity() != null) {
-                    System.out.print(cells[i][j].getEntity().getName().charAt(0) + " ");
-                } else {
-                    System.out.print("X ");
-                }
-            }
-            System.out.println();
-        }
-    }
+    //     for (int i = 0; i < size; i++) {
+    //         for (int j = 0; j < size; j++) {
+    //             if (cells[i][j].getEntity() != null) {
+    //                 System.out.print(cells[i][j].getEntity().getName().charAt(0) + " ");
+    //             } else {
+    //                 System.out.print(". ");
+    //             }
+    //         }
+    //         System.out.println();
+    //     }
+    // }
 }

@@ -5,10 +5,10 @@ import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 import org.jline.utils.NonBlockingReader;
 
-public class ConsoleInputHandler implements InputHandler {
+public class CliInputHandler implements InputHandler {
     private final NonBlockingReader reader;
 
-    public ConsoleInputHandler() throws IOException {
+    public CliInputHandler() throws IOException {
         Terminal terminal = TerminalBuilder.builder()
                                            .system(true)
                                            .jna(false)

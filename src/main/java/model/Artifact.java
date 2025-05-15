@@ -1,7 +1,6 @@
 package model;
 
 public abstract class Artifact extends Entity {
-    protected String name;
     protected int bonus;
 
     public Artifact(String name, int bonus) {
