@@ -1,6 +1,8 @@
 package model;
 
-public class Stuff {
+import java.io.Serializable;
+
+public class Stuff implements Serializable {
     private Weapon weapon;
     private Armor armor;
     private Helm helm;

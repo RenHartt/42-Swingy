@@ -23,25 +23,23 @@ public class Map {
     public Cell getCell(int x, int y) { return cells[x][y]; }
     public int getSize() { return size; }
 
-    public void setCell(int x, int y, Entity entity) { cells[x][y].setEntity(entity); }
-
     public void initMap() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                cells[i][j] = new Cell(null);
+                cells[i][j] = new Cell();
             }
         }
     }
 
     public void initHero() {
-        cells[size / 2][size / 2] = new Cell(hero);
+        cells[size / 2][size / 2].setHero(hero);
     }
 
     public void initVillain() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (cells[i][j].getEntity() == null && random.nextInt(10) == 0) {
-                    cells[i][j] = new Cell(villainFactory.createVillain(hero));
+                if (cells[i][j].getHero() == null && random.nextInt(10) == 0) {
+                    cells[i][j].setVillain(villainFactory.createVillain(hero));
                 }
             }
         }        
@@ -53,7 +51,7 @@ public class Map {
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (cells[i][j].getEntity() == hero) {
+                if (cells[i][j].getHero() == hero) {
                     x = i;
                     y = j;
                 }
@@ -63,45 +61,29 @@ public class Map {
         switch (direction) {
             case "w":
                 if (x > 0) {
-                    cells[x - 1][y].setEntity(hero);
-                    cells[x][y].setEntity(null);
+                    cells[x - 1][y].setHero(hero);
+                    cells[x][y].setHero(null);
                 }
                 break;
             case "s":
                 if (x < size - 1) {
-                    cells[x + 1][y].setEntity(hero);
-                    cells[x][y].setEntity(null);
+                    cells[x + 1][y].setHero(hero);
+                    cells[x][y].setHero(null);
                 }
                 break;
             case "a":
                 if (y > 0) {
-                    cells[x][y - 1].setEntity(hero);
-                    cells[x][y].setEntity(null);
+                    cells[x][y - 1].setHero(hero);
+                    cells[x][y].setHero(null);
                 }
                 break;
             case "d":
                 if (y < size - 1) {
-                    cells[x][y + 1].setEntity(hero);
-                    cells[x][y].setEntity(null);
+                    cells[x][y + 1].setHero(hero);
+                    cells[x][y].setHero(null);
                 }
                 break;
         }
 
     }
-
-    // public void printMap() {
-    //     System.out.print("\033[H\033[2J");
-    //     System.out.flush();
-
-    //     for (int i = 0; i < size; i++) {
-    //         for (int j = 0; j < size; j++) {
-    //             if (cells[i][j].getEntity() != null) {
-    //                 System.out.print(cells[i][j].getEntity().getName().charAt(0) + " ");
-    //             } else {
-    //                 System.out.print(". ");
-    //             }
-    //         }
-    //         System.out.println();
-    //     }
-    // }
 }

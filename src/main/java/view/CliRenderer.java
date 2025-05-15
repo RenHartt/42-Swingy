@@ -1,5 +1,7 @@
 package view;
 
+import java.util.List;
+
 import model.Map;
 import model.Hero;
 import model.Villain;
@@ -15,9 +17,11 @@ public class CliRenderer implements Renderer {
     @Override
     public void renderMenu() {
         cleanRender();
-        System.out.println("1. Continue");
-        System.out.println("2. Save Game");
-        System.out.println("3. Exit");
+        System.out.println("1. Character");
+        System.out.println("2. Continue");
+        System.out.println("3. Save Game");
+        System.out.println("4. Menu");
+        System.out.println("5. Exit");
     }
 
     @Override
@@ -29,6 +33,21 @@ public class CliRenderer implements Renderer {
     }
 
     @Override
+    public void renderCharactereMenu(Hero hero) {
+        cleanRender();
+        System.out.println("Name: " + hero.getName());
+        System.out.println();
+        System.out.println("Level: " + hero.getLevel());
+        System.out.println("XP: " + hero.getExperience() + " / " + hero.getXpToLevelUp());
+        System.out.println();
+        System.out.println("Attack: " + hero.getAttack() + " + " + hero.getBonusAttack() + " -> " + hero.getWeaponName());
+        System.out.println("Defense: " + hero.getDefense() + " + " + hero.getBonusDefense() + " -> " + hero.getArmorName());
+        System.out.println("Hit points: " + hero.getHitPoints() + " + " + hero.getBonusHitPoints() + " -> " + hero.getHelmName());
+        System.out.println();
+        System.out.println("1. Back to Menu");
+    }
+
+    @Override
     public void renderHeroCreation() {
         cleanRender();
         System.out.println("Create your hero!");
@@ -37,12 +56,17 @@ public class CliRenderer implements Renderer {
     }
 
     @Override
-    public void renderLoadHero() {
+    public void renderLoadHero(List<String> saves) {
         cleanRender();
-        System.out.println("Load your hero!");
-        System.out.println("1. Hero 1");
-        System.out.println("2. Hero 2");
-        // Need to implement loading logic
+        if (saves.size() > 0) {
+            System.out.println("Load your hero!");
+            for (int i = 0; i < saves.size(); i++) {
+                System.out.println((i + 1) + ". " + saves.get(i));
+            }
+        } else {
+            System.out.println("No save to load.");
+            System.out.println("1. Create new Hero");
+        }
     }
 
     @Override
@@ -50,8 +74,12 @@ public class CliRenderer implements Renderer {
         cleanRender();
         for (int i = 0; i < map.getSize(); i++) {
             for (int j = 0; j < map.getSize(); j++) {
-                if (map.getCell(i, j).getEntity() != null) {
-                    System.out.print(map.getCell(i, j).getEntity().getName().charAt(0) + " ");
+                if (map.getCell(i, j).getHero() != null) {
+                    System.out.print(map.getCell(i, j).getHero().getName().charAt(0) + " ");
+                } else if (map.getCell(i, j).getVillain() != null) {
+                    System.out.print(map.getCell(i, j).getVillain().getName().charAt(0) + " ");
+                } else if (map.getCell(i, j).getArtifact() != null) {
+                    System.out.print(map.getCell(i, j).getArtifact().getName().charAt(0) + " ");
                 } else {
                     System.out.print(". ");
                 }

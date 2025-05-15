@@ -1,5 +1,7 @@
 package view;
 
+import java.util.List;
+
 import model.Artifact;
 import model.Villain;
 import model.Hero;
@@ -9,8 +11,9 @@ public interface Renderer {
     void cleanRender();
     void renderMenu();
     void renderStartMenu();
+    void renderCharactereMenu(Hero hero);
     void renderHeroCreation();
-    void renderLoadHero();
+    void renderLoadHero(List<String> saves);
     void renderMap(Map map);
     void renderFight(Hero hero, Villain villain);
     void renderDefeat();

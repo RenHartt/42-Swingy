@@ -1,6 +1,8 @@
 package model;
 
-public abstract class Entity {
+import java.io.Serializable;
+
+public abstract class Entity implements Serializable {
     String name;
     public Entity(String name) {
         this.name = name;

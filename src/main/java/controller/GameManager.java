@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import model.*;
 import view.*;
 
@@ -37,19 +39,30 @@ public class GameManager {
         } else if (choice.equals("2")) {
             hero = new Wizard();
         }
-        map = new Map(hero);
-        playerController = new PlayerController(map);
         GameLoop();
     }
 
     private void LoadHero() {
-        renderer.renderLoadHero();
+        List<String> saveFiles = SaveManager.listSaveFiles();
+        renderer.renderLoadHero(saveFiles);
         String choice = inputHandler.getInput();
-        // Load hero logic
-        GameLoop();
+        if (saveFiles.size() > 0) {
+            int choiceInt = Integer.parseInt(choice);
+            String selectedSaveFile = saveFiles.get(choiceInt - 1);
+            hero = SaveManager.load(selectedSaveFile);
+            GameLoop();
+        } else {
+            if (choice.equals("1")) {
+                HeroCreation();
+            }
+        }
     }
 
     private void GameLoop() {
+        if (map == null) {
+            map = new Map(hero);
+        }
+        playerController = new PlayerController(map);
         while (true) {
             renderer.renderMap(map);
             String direction = inputHandler.getInput();
@@ -57,9 +70,6 @@ public class GameManager {
                 Menu();
             } else {
                 playerController.moveHero(direction);
-                if (map.getCell(hero.getX(), hero.getY()).getEntity() instanceof Villain) {
-                    
-                }
             }
         }
     }
@@ -68,11 +78,23 @@ public class GameManager {
         renderer.renderMenu();
         String choice = inputHandler.getInput();
         if (choice.equals("1")) {
-            GameLoop();
+            CharacterMenu(hero);
         } else if (choice.equals("2")) {
-            // Save game logic
+            GameLoop();
         } else if (choice.equals("3")) {
+            SaveManager.save(hero);
+        } else if (choice.equals("4")){
+            StartMenu();
+        } else if (choice.equals("5")) {
             renderer.close();
+        }
+    }
+
+    private void CharacterMenu(Hero hero) {
+        renderer.renderCharactereMenu(hero);
+        String choice = inputHandler.getInput();
+        if (choice.equals("1")) {
+            Menu();
         }
     }
 }
