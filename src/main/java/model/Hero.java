@@ -28,6 +28,18 @@ public abstract class Hero extends Entity {
     public String getArmorName() { return (this.stuff.getArmor() != null ? this.stuff.getArmor().getName() : ""); }
     public String getHelmName() { return (this.stuff.getHelm() != null ? this.stuff.getHelm().getName() : ""); }
 
-    public void setLevel(int level) { this.level = level; }
-    public void setExperience(int experience) { this.experience = experience; }
+    public void takeArtifact(Artifact artifact) {
+        stuff.addArtifact(artifact);
+    }
+
+    public void increaseExperience(int experience) {
+        this.experience += experience;
+        while (this.experience > getXpToLevelUp()) {
+            this.experience -= getXpToLevelUp();
+            this.level++;
+        }
+    }
+
+    public void takeDamage(int damage) { stats.setHitPoints(Math.max(stats.getHitPoints() - damage, 0)); }
+    public boolean isDead() { return stats.getHitPoints() == 0; }
 }

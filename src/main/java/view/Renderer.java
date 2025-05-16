@@ -15,10 +15,10 @@ public interface Renderer {
     void renderHeroCreation();
     void renderLoadHero(List<String> saves);
     void renderMap(Map map);
-    void renderFight(Hero hero, Villain villain);
+    void renderBattle(Hero hero, Villain villain);
     void renderDefeat();
     void renderVictory();
-    void renderLoot(Artifact artifact);
+    void renderLoot(Hero hero, Artifact artifact);
     void renderLevelUp(Hero hero);
     void close();
 }

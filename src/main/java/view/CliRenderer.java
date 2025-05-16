@@ -89,14 +89,14 @@ public class CliRenderer implements Renderer {
     }
 
     @Override
-    public void renderFight(Hero hero, Villain villain) {
+    public void renderBattle(Hero hero, Villain villain) {
         cleanRender();
         System.out.println("Fight!");
         System.out.println("Your hero: | Enemy: ");
         System.out.println(hero.getName() + " | " + villain.getName());
-        System.out.println("HitPoint: " + hero.getHitPoints() + " | HitPoint: " + villain.getHitPoints());
-        System.out.println("Attack: " + hero.getAttack() + " | Attack: " + villain.getAttack());
-        System.out.println("Defend: " + hero.getDefense() + " | Defend: " + villain.getDefense());
+        System.out.println("HitPoint: " + hero.getTotalHitPoints() + " | HitPoint: " + villain.getHitPoints());
+        System.out.println("Attack: " + hero.getTotalAttack() + " | Attack: " + villain.getAttack());
+        System.out.println("Defend: " + hero.getTotalDefense() + " | Defend: " + villain.getDefense());
         System.out.println("1. Attack");
         System.out.println("2. Escape");
     }
@@ -106,6 +106,7 @@ public class CliRenderer implements Renderer {
         cleanRender();
         System.out.println("You have been defeated!");
         System.out.println("Game Over");
+        System.out.println("1. Continue");
     }
 
     @Override
@@ -113,10 +114,11 @@ public class CliRenderer implements Renderer {
         cleanRender();
         System.out.println("You have won the battle!");
         System.out.println("Congratulations!");
+        System.out.println("1. Continue");
     }
 
     @Override
-    public void renderLoot(Artifact artifact) {
+    public void renderLoot(Hero hero, Artifact artifact) {
         cleanRender();
         System.out.println("You have found an artifact!");
         System.out.println("Type: " + artifact.getClass().getSimpleName());

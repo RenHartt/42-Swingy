@@ -22,6 +22,28 @@ public class Map {
 
     public Cell getCell(int x, int y) { return cells[x][y]; }
     public int getSize() { return size; }
+    
+    public Vector getHeroPosition() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (cells[i][j].getHero() == hero) {
+                    return new Vector(i, j);
+                }
+            }
+        }
+        return null;
+    }
+
+    public Cell getHeroCell() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (cells[i][j].getHero() == hero) {
+                    return cells[i][j];
+                }
+            }
+        }
+        return null;
+    }
 
     public void initMap() {
         for (int i = 0; i < size; i++) {
@@ -46,41 +68,31 @@ public class Map {
     }
 
     public void moveHero(String direction) {
-        int x = size / 2;
-        int y = size / 2;
-
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (cells[i][j].getHero() == hero) {
-                    x = i;
-                    y = j;
-                }
-            }
-        }
+        Vector HeroPos = getHeroPosition();
 
         switch (direction) {
             case "w":
-                if (x > 0) {
-                    cells[x - 1][y].setHero(hero);
-                    cells[x][y].setHero(null);
+                if (HeroPos.x > 0) {
+                    cells[HeroPos.x - 1][HeroPos.y].setHero(hero);
+                    cells[HeroPos.x][HeroPos.y].setHero(null);
                 }
                 break;
             case "s":
-                if (x < size - 1) {
-                    cells[x + 1][y].setHero(hero);
-                    cells[x][y].setHero(null);
+                if (HeroPos.x < size - 1) {
+                    cells[HeroPos.x + 1][HeroPos.y].setHero(hero);
+                    cells[HeroPos.x][HeroPos.y].setHero(null);
                 }
                 break;
             case "a":
-                if (y > 0) {
-                    cells[x][y - 1].setHero(hero);
-                    cells[x][y].setHero(null);
+                if (HeroPos.y > 0) {
+                    cells[HeroPos.x][HeroPos.y - 1].setHero(hero);
+                    cells[HeroPos.x][HeroPos.y].setHero(null);
                 }
                 break;
             case "d":
-                if (y < size - 1) {
-                    cells[x][y + 1].setHero(hero);
-                    cells[x][y].setHero(null);
+                if (HeroPos.y < size - 1) {
+                    cells[HeroPos.x][HeroPos.y + 1].setHero(hero);
+                    cells[HeroPos.x][HeroPos.y].setHero(null);
                 }
                 break;
         }

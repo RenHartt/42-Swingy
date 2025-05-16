@@ -10,14 +10,15 @@ public class VillainFactory {
     }
 
     private int applyVariation(int baseStat) {
-        double variation = 1 + (random.nextDouble() * 0.2 - 0.1);
-        return (int) (baseStat * variation);
-    }
+        double factor = 0.9 + random.nextDouble() * 0.2; // [0.9, 1.1[
+        // on arrondit plutôt que de tronquer
+        return Math.max(1, (int)Math.round(baseStat * factor));
+    }    
 
-    private Stats getRandomStats(Stats stats) {
-        int health = applyVariation(stats.getHitPoints());
-        int attack = applyVariation(stats.getAttack());
-        int defense = applyVariation(stats.getDefense());
+    private Stats getRandomStats(Hero hero) {
+        int health = applyVariation(hero.getTotalHitPoints());
+        int attack = applyVariation(hero.getTotalAttack());
+        int defense = applyVariation(hero.getTotalDefense());
 
         health = Math.max(1, health);
         attack = Math.max(1, attack);
@@ -27,6 +28,23 @@ public class VillainFactory {
     }
 
     public Villain createVillain(Hero hero) {
-        return new Villain(getRandomStats(hero.getStats()));
+        return new Villain(getRandomStats(hero));
+    }
+
+    public Artifact randomArtifact(Hero hero) {
+        int choice = (int) (Math.random() * 3);
+        int bonus;
+        switch (choice) {
+            case 0:
+                bonus = applyVariation(hero.getBonusAttack());
+                return new Weapon(bonus);
+            case 1:
+                bonus = applyVariation(hero.getBonusDefense());
+                return new Armor(bonus);
+            case 2:
+                bonus = applyVariation(hero.getBonusHitPoints());
+                return new Helm(bonus);
+        }
+        return null;
     }
 }
