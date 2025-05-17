@@ -67,7 +67,7 @@ public class Map {
         }        
     }
 
-    public void moveHero(String direction) {
+    public boolean moveHero(String direction) {
         Vector HeroPos = getHeroPosition();
 
         switch (direction) {
@@ -75,27 +75,35 @@ public class Map {
                 if (HeroPos.x > 0) {
                     cells[HeroPos.x - 1][HeroPos.y].setHero(hero);
                     cells[HeroPos.x][HeroPos.y].setHero(null);
+                } else {
+                    return false;
                 }
                 break;
             case "s":
                 if (HeroPos.x < size - 1) {
                     cells[HeroPos.x + 1][HeroPos.y].setHero(hero);
                     cells[HeroPos.x][HeroPos.y].setHero(null);
+                } else {
+                    return false;
                 }
                 break;
             case "a":
                 if (HeroPos.y > 0) {
                     cells[HeroPos.x][HeroPos.y - 1].setHero(hero);
                     cells[HeroPos.x][HeroPos.y].setHero(null);
+                } else {
+                    return false;
                 }
                 break;
             case "d":
                 if (HeroPos.y < size - 1) {
                     cells[HeroPos.x][HeroPos.y + 1].setHero(hero);
                     cells[HeroPos.x][HeroPos.y].setHero(null);
+                } else {
+                    return false;
                 }
                 break;
         }
-
+        return true;
     }
 }

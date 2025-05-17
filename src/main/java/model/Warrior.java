@@ -5,5 +5,7 @@ public class Warrior extends Hero {
         super("Warrior");
         this.stats = new Stats(10, 5, 50);
         this.stuff = new Stuff(new Weapon(10), new Armor(5), new Helm(20));
+        this.currentHitPoints = getTotalHitPoints();
+        this.maxHitPoints = getTotalHitPoints();
     }
 }

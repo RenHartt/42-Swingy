@@ -39,12 +39,16 @@ public class CliRenderer implements Renderer {
         System.out.println();
         System.out.println("Level: " + hero.getLevel());
         System.out.println("XP: " + hero.getExperience() + " / " + hero.getXpToLevelUp());
+        System.out.println("Current Hit Points: " + hero.getCurrentHitPoints() + " / " + hero.getMaxHitPoints());
         System.out.println();
         System.out.println("Attack: " + hero.getAttack() + " + " + hero.getBonusAttack() + " -> " + hero.getWeaponName());
         System.out.println("Defense: " + hero.getDefense() + " + " + hero.getBonusDefense() + " -> " + hero.getArmorName());
         System.out.println("Hit points: " + hero.getHitPoints() + " + " + hero.getBonusHitPoints() + " -> " + hero.getHelmName());
         System.out.println();
-        System.out.println("1. Back to Menu");
+        System.out.println("Potion: " + hero.getPotionCount());
+        System.out.println();
+        System.out.println("1. Use Potion");
+        System.out.println("2. Back to Menu");
     }
 
     @Override
@@ -94,7 +98,7 @@ public class CliRenderer implements Renderer {
         System.out.println("Fight!");
         System.out.println("Your hero: | Enemy: ");
         System.out.println(hero.getName() + " | " + villain.getName());
-        System.out.println("HitPoint: " + hero.getTotalHitPoints() + " | HitPoint: " + villain.getHitPoints());
+        System.out.println("HitPoint: " + hero.getCurrentHitPoints() + " | HitPoint: " + villain.getHitPoints());
         System.out.println("Attack: " + hero.getTotalAttack() + " | Attack: " + villain.getAttack());
         System.out.println("Defend: " + hero.getTotalDefense() + " | Defend: " + villain.getDefense());
         System.out.println("1. Attack");

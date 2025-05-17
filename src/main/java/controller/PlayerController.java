@@ -9,7 +9,7 @@ public class PlayerController {
         this.map = map;
     }
 
-    public void moveHero(String direction) {
-        map.moveHero(direction);
+    public boolean moveHero(String direction) {
+        return map.moveHero(direction);
     }
 }

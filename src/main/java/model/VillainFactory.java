@@ -10,8 +10,7 @@ public class VillainFactory {
     }
 
     private int applyVariation(int baseStat) {
-        double factor = 0.9 + random.nextDouble() * 0.2; // [0.9, 1.1[
-        // on arrondit plutôt que de tronquer
+        double factor = 0.9 + random.nextDouble() * 0.2;
         return Math.max(1, (int)Math.round(baseStat * factor));
     }    
 
@@ -32,7 +31,7 @@ public class VillainFactory {
     }
 
     public Artifact randomArtifact(Hero hero) {
-        int choice = (int) (Math.random() * 3);
+        int choice = (int) (Math.random() * 6);
         int bonus;
         switch (choice) {
             case 0:
@@ -44,7 +43,8 @@ public class VillainFactory {
             case 2:
                 bonus = applyVariation(hero.getBonusHitPoints());
                 return new Helm(bonus);
+            default:
+                return new Potion();
         }
-        return null;
     }
 }

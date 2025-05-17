@@ -22,6 +22,8 @@ public class GameManager {
     }
 
     public void start() {
+        hero = null;
+        map = null;
         StartMenu();
     }
 
@@ -81,6 +83,7 @@ public class GameManager {
 
     private void handleWin() {
         Cell heroCell = map.getHeroCell();
+        hero.increaseExperience(heroCell.getVillain().getXpGain());
         heroCell.setVillain(null);
         heroCell.setArtifact(factory.randomArtifact(hero));
         renderer.renderVictory();
@@ -91,6 +94,8 @@ public class GameManager {
     }
 
     private void handleLose() {
+        map = null;
+        hero = null;
         renderer.renderDefeat();
         String choice = inputHandler.getInput();
         if (choice.equals("1")) {
@@ -133,7 +138,10 @@ public class GameManager {
             if (direction.equalsIgnoreCase("q")) {
                 Menu();
             } else {
-                playerController.moveHero(direction);
+                if (playerController.moveHero(direction) == false) {
+                    map = null;
+                    GameLoop();
+                }
                 checkInteraction();
             }
         }
@@ -161,6 +169,11 @@ public class GameManager {
 
         String choice = inputHandler.getInput();
         if (choice.equals("1")) {
+            if (hero.getPotionCount() > 0 && hero.getCurrentHitPoints() < hero.getMaxHitPoints()) {
+                hero.heal();
+            }
+            CharacterMenu(hero);
+        } else if (choice.equals("2")) {
             Menu();
         }
     }
