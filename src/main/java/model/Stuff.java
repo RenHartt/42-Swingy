@@ -6,13 +6,12 @@ public class Stuff implements Serializable {
     private Weapon weapon;
     private Armor armor;
     private Helm helm;
-    private int potions;
+    private int potions = 5;
 
     public Stuff(Weapon weapon, Armor armor, Helm helm) {
         this.weapon = weapon;
         this.armor = armor;
         this.helm = helm;
-        this.potions = 3;
     }
 
     public void addArtifact(Artifact artifact) {
